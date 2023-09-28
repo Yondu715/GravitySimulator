@@ -1,60 +1,79 @@
 import 'dart:math';
-
+import 'dart:developer' as dev;
 import 'package:gravity_simulator/domain/entities/vector.dart';
 
 class Particle {
   final Vector _position;
   final Vector _velocity;
-  final Vector _acceleration;
-  final List<Vector> _forces = [];
-  double? _mass;
+  final Vector _force;
+  double _mass;
 
-  Particle({double x = 0, double y = 0, double vx = 0, double vy = 0, double ax = 0, double ay = 0, double mass = 1}): 
-    _position = Vector(x: x, y: y),
-    _velocity = Vector(x: vx, y: vy),
-    _acceleration = Vector(x: ax, y: ay)
-  {
-    _mass = mass;
-  }
-
-  double distanceTo(Particle a) {
-    return _position.distanceToVector(a.getPosition());
-  }
+  Particle(
+      {double x = 0,
+      double y = 0,
+      double vx = 0,
+      double vy = 0,
+      double mass = 1})
+      : _position = Vector(x: x, y: y),
+        _velocity = Vector(x: vx, y: vy),
+        _mass = mass,
+        _force = Vector();
 
   double getRadius() {
-    return sqrt(_mass!/pi);
+    return sqrt(_mass / pi);
   }
 
   Vector getPosition() {
     return _position;
   }
 
+  void addPositionNum(double x, double y) {
+    _position.x += x;
+    _position.y += y;
+  }
+
+  void addPositionVector(Vector position) {
+    _position.add(position);
+  }
+
   Vector getVelocity() {
     return _velocity;
   }
 
-  Vector getAcceleration() {
-    return _acceleration;
+  void addVelocity(Vector velocity) {
+    _velocity.add(velocity);
+  }
+
+  void addVelocityNum(double x, double y) {
+    _velocity.x += x;
+    _velocity.y += y;
+  }
+
+  Vector getForce() {
+    return _force;
+  }
+
+  void addForce(Vector force) {
+    _force.add(force);
+  }
+
+  void resetForce() {
+    _force.x = 0;
+    _force.y = 0;
   }
 
   double getMass() {
-    return _mass!;
+    return _mass;
   }
 
-  List<Vector> getForces() {
-    return _forces;
+  void addMass(double mass) {
+    _mass += mass;
   }
 
-  void setPosition(Vector position) {
-    _position.setXY(position);
+  double distanceTo(Particle particle) {
+    double dx = _position.x - particle._position.x;
+    double dy = _position.y - particle._position.y;
+    double dist = sqrt(dx * dx + dy * dy);
+    return dist;
   }
-
-  void setVelocity(Vector velocity) {
-    _velocity.setXY(velocity);
-  }
-
-  void setAcceleration(Vector acceleration) {
-    _velocity.setXY(acceleration);
-  }
-
 }
