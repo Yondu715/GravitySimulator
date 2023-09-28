@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'dart:developer' as dev;
 import 'package:gravity_simulator/domain/entities/vector.dart';
 
 class Particle {

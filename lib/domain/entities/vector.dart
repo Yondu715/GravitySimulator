@@ -12,9 +12,21 @@ class Vector {
     return this;
   }
 
+  Vector sub(Vector a) {
+    x -= a.x;
+    y -= a.y;
+    return this;
+  }
+
   Vector mult(double n) {
     x *= n;
     y *= n;
+    return this;
+  }
+
+  Vector div(double n) {
+    x /= n;
+    y /= n;
     return this;
   }
 

@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gravity_simulator/infrastructure/screens/app.dart';
+import 'package:gravity_simulator/infrastructure/presentation/app.dart';
 
 
 void main() {
