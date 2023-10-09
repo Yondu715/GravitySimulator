@@ -1,10 +1,10 @@
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:gravity_simulator/domain/entities/particle.dart';
-import 'package:gravity_simulator/domain/services/particle_service.dart';
-import 'package:gravity_simulator/infrastructure/presentation/screens/simulation/painter/particle_painter.dart';
+import 'package:gravity_simulator/domain/entities/particle/particle.dart';
+import 'package:gravity_simulator/domain/services/particle-service/particle-service-interface.dart';
+import 'package:gravity_simulator/domain/services/particle-service/particle-service.dart';
+import './painter/particle_painter.dart';
 
 class SimulationPage extends StatefulWidget {
   const SimulationPage({super.key, this.particleNum = 2});
@@ -17,16 +17,16 @@ class SimulationPage extends StatefulWidget {
 class _SimulationPageState extends State<SimulationPage>
     with TickerProviderStateMixin {
   final List<Particle> _particles = [];
-  final ParticleService particleService = ParticleService();
-  AnimationController? _animationController;
-  Animation<double>? _animation;
+  final IParticleService particleService = ParticleService();
+  late AnimationController _animationController;
+  late Animation<double> _animation;
   Random random = Random();
   final Size _size =
       WidgetsBinding.instance.platformDispatcher.views.first.physicalSize;
 
   @override
   void dispose() {
-    _animationController!.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 
@@ -40,15 +40,14 @@ class _SimulationPageState extends State<SimulationPage>
           mass: getRandomBetween(100, 500)));
     }
 
-    _animationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 1));
-    _animation = Tween(begin: 0.0, end: 1.0).animate(_animationController!);
-    _animation!.addListener(() {
+    _animationController = AnimationController(vsync: this, duration: const Duration(seconds: 1));
+    _animation = Tween(begin: 0.0, end: 1.0).animate(_animationController);
+    _animation.addListener(() {
       setState(() {
         updateParticles();
       });
     });
-    _animationController!.repeat();
+    _animationController.repeat();
   }
 
   void updateParticles() {
@@ -60,15 +59,17 @@ class _SimulationPageState extends State<SimulationPage>
     return result;
   }
 
+  void goBack(BuildContext context) {
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: () => goBack(context),
         ),
       ),
       body: CustomPaint(

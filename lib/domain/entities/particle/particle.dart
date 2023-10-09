@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:gravity_simulator/domain/entities/vector.dart';
+import 'package:gravity_simulator/domain/entities/particle/vector.dart';
 
 class Particle {
   final Vector _position;

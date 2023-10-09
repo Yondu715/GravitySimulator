@@ -17,6 +17,14 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
+  void onSubmit(String value) {
+    int val = int.parse(value);
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => SimulationPage(particleNum: val))
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,31 +33,25 @@ class _HomePageState extends State<HomePage> {
         ),
         body: Center(
             child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text(
-          'Gravity Simulator',
-          style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(height: 20.0),
-        SizedBox(
-          width: 250,
-          child: TextField(
-            controller: _textEditingController,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              hintText: "Введите число точек",
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Gravity Simulator',
+              style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
             ),
-            onSubmitted: (value) {
-              int val = int.parse(value);
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => SimulationPage(particleNum: val)));
-            },
-          ),
-        )
-      ],
-    )));
+            const SizedBox(height: 20.0),
+            SizedBox(
+              width: 250,
+              child: TextField(
+                controller: _textEditingController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  hintText: "Введите число точек",
+                ),
+                onSubmitted: onSubmit,
+              ),
+            )
+          ],
+        )));
   }
 }
