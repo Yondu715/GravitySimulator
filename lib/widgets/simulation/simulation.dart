@@ -1,23 +1,22 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:gravity_simulator/domain/entities/particle/particle.dart';
-import 'package:gravity_simulator/domain/services/particle-service/particle-service-interface.dart';
-import 'package:gravity_simulator/domain/services/particle-service/particle-service.dart';
-import './painter/particle_painter.dart';
+import '../../entities/particle/model/particle.dart';
+import '../../entities/particle/model/services/particle_service.dart';
+import '../../entities/particle/ui/painter/particle_painter.dart';
 
-class SimulationPage extends StatefulWidget {
-  const SimulationPage({super.key, this.particleNum = 2});
+class SimulationWidget extends StatefulWidget {
+  const SimulationWidget({super.key, this.particleNum = 2});
   final int particleNum;
 
   @override
-  State<SimulationPage> createState() => _SimulationPageState();
+  State<SimulationWidget> createState() => _SimulationWidgetState();
 }
 
-class _SimulationPageState extends State<SimulationPage>
+class _SimulationWidgetState extends State<SimulationWidget>
     with TickerProviderStateMixin {
   final List<Particle> _particles = [];
-  final IParticleService particleService = ParticleService();
+  final ParticleService particleService = ParticleService();
   late AnimationController _animationController;
   late Animation<double> _animation;
   Random random = Random();
@@ -35,12 +34,13 @@ class _SimulationPageState extends State<SimulationPage>
     super.initState();
     for (var i = 0; i < widget.particleNum; i++) {
       _particles.add(Particle(
-          x: getRandomBetween(0, _size.width),
-          y: getRandomBetween(0, _size.height),
+          x: getRandomBetween(200, _size.width - 500),
+          y: getRandomBetween(300, _size.height - 500),
           mass: getRandomBetween(100, 500)));
     }
 
-    _animationController = AnimationController(vsync: this, duration: const Duration(seconds: 1));
+    _animationController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 1));
     _animation = Tween(begin: 0.0, end: 1.0).animate(_animationController);
     _animation.addListener(() {
       setState(() {
@@ -59,19 +59,9 @@ class _SimulationPageState extends State<SimulationPage>
     return result;
   }
 
-  void goBack(BuildContext context) {
-    Navigator.pop(context);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => goBack(context),
-        ),
-      ),
       body: CustomPaint(
         painter: ParticlePainter(_particles, Paint()..color = Colors.black),
       ),

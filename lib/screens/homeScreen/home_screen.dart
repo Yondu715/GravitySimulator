@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:gravity_simulator/infrastructure/presentation/screens/simulation/simulation.dart';
+import 'package:gravity_simulator/screens/simulationScreen/simulation_screen.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() => _HomePageState();
+  State<StatefulWidget> createState() => _HomeScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _textEditingController = TextEditingController();
 
   @override
@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
     int val = int.parse(value);
     Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => SimulationPage(particleNum: val))
+        MaterialPageRoute(builder: (context) => SimulationScreen(particleNum: val))
     );
   }
 

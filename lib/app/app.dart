@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gravity_simulator/infrastructure/presentation/screens/home/home.dart';
-import 'package:gravity_simulator/infrastructure/presentation/theme/app_theme.dart';
+import 'package:gravity_simulator/screens/homeScreen/home_screen.dart';
+import 'package:gravity_simulator/shared/theme/app_theme.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -10,7 +10,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Gravity Simulation',
       theme: AppTheme.getAppTheme(),
-      home: const HomePage(),
+      home: const HomeScreen(),
     );
   }
 }

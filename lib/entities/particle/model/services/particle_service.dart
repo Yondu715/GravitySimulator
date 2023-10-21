@@ -1,12 +1,10 @@
-import 'package:gravity_simulator/domain/entities/particle/vector.dart';
-import 'package:gravity_simulator/domain/services/particle-service/particle-service-interface.dart';
-import 'package:gravity_simulator/domain/services/physics-service/phisics.dart';
-import '../../entities/particle/particle.dart';
+import '../vector.dart';
+import '../particle.dart';
+import './phisics.dart';
 
-class ParticleService extends IParticleService {
+class ParticleService {
   final Physics _physics = Physics();
 
-  @override
   void simulateParticles(List<Particle> particles) {
     for (var i = 0; i < particles.length - 1; i++) {
       final Particle p0 = particles[i];

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gravity_simulator/domain/entities/particle/particle.dart';
+import 'package:gravity_simulator/entities/particle/model/particle.dart';
 
 class ParticlePainter extends CustomPainter {
   final List<Particle> _particles;
