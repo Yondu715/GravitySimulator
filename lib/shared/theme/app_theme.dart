@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static ThemeData getAppTheme() {
+  static ThemeData getTheme() {
     return ThemeData(
         colorScheme: const ColorScheme(
             brightness: Brightness.light,

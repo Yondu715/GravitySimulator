@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:gravity_simulator/entities/particle/model/store.dart';
-import 'package:gravity_simulator/screens/simulationScreen/simulation_screen.dart';
+import 'package:gravity_simulator/shared/routing/routes.dart';
 import 'package:gravity_simulator/shared/ui/textInput/text_input.dart';
 import 'package:provider/provider.dart';
 
@@ -18,11 +18,10 @@ class ChangeCount extends StatelessWidget {
       type: TextInputType.number,
       placeHolder: "Введите число точек",
       onSubmited: (_) => {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (_) => const SimulationScreen()))
+        Navigator.pushNamed(context, Routes.simulation)
       },
       onChanged: (value) => {
-    log(particleModel.particleCount.toString()),
+    log(particleModel.getParticlesCount().toString()),
         particleModel.setCount(int.parse(value))
         },
     );

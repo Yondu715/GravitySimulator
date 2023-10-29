@@ -31,7 +31,7 @@ class _SimulationWidgetState extends State<SimulationWidget>
     super.initState();
     ParticleModel particleModel = context.read<ParticleModel>();
     List<Particle> temp = [];
-    for (var i = 0; i < particleModel.particleCount; i++) {
+    for (var i = 0; i < particleModel.getParticlesCount(); i++) {
       temp.add(Particle(
           x: getRandomBetween(50, _size.width - 250),
           y: getRandomBetween(50, _size.height - 250),
@@ -44,7 +44,7 @@ class _SimulationWidgetState extends State<SimulationWidget>
     _animation = Tween(begin: 0.0, end: 1.0).animate(_animationController);
     _animation.addListener(() {
       setState(() {
-        if (!particleModel.isSimulating) {
+        if (!particleModel.getIsSimulating()) {
             particleModel.simulate();
         }
       });
@@ -58,7 +58,7 @@ class _SimulationWidgetState extends State<SimulationWidget>
 
   @override
   Widget build(BuildContext context) {
-    List<Particle> particles = context.watch<ParticleModel>().particles;
+    List<Particle> particles = context.watch<ParticleModel>().getParticles();
     
     return Scaffold(
       body: CustomPaint(

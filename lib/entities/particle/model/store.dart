@@ -5,13 +5,21 @@ import './vector.dart';
 
 class ParticleModel with ChangeNotifier {
   final Physics _physics = Physics(G: 0.001);
-  int _particleCount = 0;
+  int _particlesCount = 0;
   bool _isSimulating = false;
   final List<Particle> _particles = [];
 
-  List<Particle> get particles => _particles;
-  int get particleCount => _particleCount;
-  bool get isSimulating => _isSimulating;
+  List<Particle> getParticles() {
+    return _particles;
+  }
+
+  int getParticlesCount() {
+    return _particlesCount;
+  }
+
+  bool getIsSimulating() {
+    return _isSimulating;
+  }
 
   ParticleModel._privateConstructor();
   static final ParticleModel _instance = ParticleModel._privateConstructor();
@@ -32,7 +40,7 @@ class ParticleModel with ChangeNotifier {
   }
 
   void setCount(int count) {
-    _particleCount = count;
+    _particlesCount = count;
     notifyListeners();
   }
 

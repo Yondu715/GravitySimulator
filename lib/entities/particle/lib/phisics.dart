@@ -8,8 +8,7 @@ class Physics {
   Physics({this.G = 0.01});
 
   double getAttractiveForce(double mass1, double mass2, double range) {
-    double force = G * mass1 * mass2 / max(range * range, 0.00001);
-    return force;
+    return G * mass1 * mass2 / max(range * range, 0.00001);
   }
 
   Vector getAttractiveForceVector(Particle a, Particle b) {
