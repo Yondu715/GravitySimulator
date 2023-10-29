@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../entities/particle/model/store.dart';
 import '../../entities/particle/model/particle.dart';
-import '../../entities/particle/ui/painter/particle_painter.dart';
+import '../../entities/particle/ui/particleList/particle_list.dart';
 
 class SimulationWidget extends StatefulWidget {
   const SimulationWidget({super.key});
@@ -61,10 +61,7 @@ class _SimulationWidgetState extends State<SimulationWidget>
     List<Particle> particles = context.watch<ParticleModel>().getParticles();
     
     return Scaffold(
-      body: CustomPaint(
-        painter: ParticlePainter(
-            particles, Paint()..color = Colors.black),
-      ),
+      body: ParticleList(particles: particles, particleColor: Colors.cyan)
     );
   }
 }
