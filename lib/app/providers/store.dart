@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gravity_simulator/entities/particle/model/store.dart';
+import 'package:gravity_simulator/entities/particle/model/particle_model.dart';
 import 'package:provider/provider.dart';
 
 class StoreProvider extends StatelessWidget {

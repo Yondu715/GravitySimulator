@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../features/particle/changeCount/change_count.dart';
+import '../../features/particle/change_count/change_count.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

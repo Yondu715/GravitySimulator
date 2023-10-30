@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:gravity_simulator/entities/particle/model/store.dart';
+import 'package:gravity_simulator/entities/particle/model/particle_model.dart';
 import 'package:gravity_simulator/shared/routing/routes.dart';
 import 'package:gravity_simulator/shared/ui/textInput/text_input.dart';
 import 'package:provider/provider.dart';

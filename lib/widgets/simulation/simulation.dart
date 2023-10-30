@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../entities/particle/model/store.dart';
+import '../../entities/particle/model/particle_model.dart';
 import '../../entities/particle/model/particle.dart';
 import '../../entities/particle/ui/particleList/particle_list.dart';
 

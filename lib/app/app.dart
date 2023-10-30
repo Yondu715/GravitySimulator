@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gravity_simulator/app/providers/router_provider.dart';
-import 'package:gravity_simulator/app/providers/store_provider.dart';
+import 'package:gravity_simulator/app/providers/router.dart';
+import 'package:gravity_simulator/app/providers/store.dart';
 import 'package:gravity_simulator/shared/theme/app_theme.dart';
 import 'package:url_strategy/url_strategy.dart';
 
