@@ -12,6 +12,7 @@ class App extends StatelessWidget {
     setPathUrlStrategy();
     return StoreProvider(
         child: MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Gravity Simulation',
       theme: AppTheme.getTheme(),
       routes: routerView,

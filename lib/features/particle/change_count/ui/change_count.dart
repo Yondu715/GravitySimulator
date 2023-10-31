@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:gravity_simulator/entities/particle/model/particle_model.dart';
 import 'package:gravity_simulator/shared/routing/routes.dart';
@@ -21,7 +19,6 @@ class ChangeCount extends StatelessWidget {
         Navigator.pushNamed(context, Routes.simulation)
       },
       onChanged: (value) => {
-    log(particleModel.getParticlesCount().toString()),
         particleModel.setCount(int.parse(value))
         },
     );

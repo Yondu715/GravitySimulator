@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../widgets/simulation/simulation.dart';
-import '../../shared/ui/header/header.dart';
+import '../../../widgets/simulation/ui/Simulation.dart';
+import '../../../shared/ui/header/header.dart';
 
 class SimulationScreen extends StatelessWidget {
   const SimulationScreen({super.key});

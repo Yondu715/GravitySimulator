@@ -1,5 +1,5 @@
-import 'package:gravity_simulator/screens/home/home.dart';
-import 'package:gravity_simulator/screens/simulation/simulation.dart';
+import 'package:gravity_simulator/screens/home/ui/home.dart';
+import 'package:gravity_simulator/screens/simulation/ui/simulation.dart';
 import 'package:gravity_simulator/shared/routing/routes.dart';
 
 final routerView = {

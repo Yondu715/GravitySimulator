@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gravity_simulator/entities/particle/model/particle.dart';
-import './particle_painter.dart';
+import './Painter.dart';
 
 class ParticleList extends StatelessWidget {
   final List<Particle> particles;
