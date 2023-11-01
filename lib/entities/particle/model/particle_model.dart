@@ -4,7 +4,7 @@ import './particle.dart';
 import './vector.dart';
 
 class ParticleModel with ChangeNotifier {
-  final Physics _physics = Physics(G: 0.0001);
+  final Physics _physics = Physics(G: 0.00001);
   int _particlesCount = 0;
   bool _isSimulating = false;
   final List<Particle> _particles = [];
@@ -19,13 +19,6 @@ class ParticleModel with ChangeNotifier {
 
   bool getIsSimulating() {
     return _isSimulating;
-  }
-
-  ParticleModel._privateConstructor();
-  static final ParticleModel _instance = ParticleModel._privateConstructor();
-
-  factory ParticleModel() {
-    return _instance;
   }
 
   void add(Particle particle) {

@@ -65,6 +65,6 @@ class _SimulationWidgetState extends State<SimulationWidget>
     List<Particle> particles = context.watch<ParticleModel>().getParticles();
 
     return Scaffold(
-        body: ParticleList(particles: particles, particleColor: Colors.grey));
+        body: ParticleList(particles: particles, particleColor: Colors.cyan));
   }
 }
