@@ -6,7 +6,7 @@ import './vector.dart';
 
 class ParticleModel with ChangeNotifier {
   int _particlesCount = 0;
-  double G = 0.001;
+  double G = 0.0001;
   bool _isSimulating = false;
   final List<Particle> _particles = [];
 
@@ -72,6 +72,46 @@ class ParticleModel with ChangeNotifier {
       particle.addPositionVector(particle.getVelocity());
       particle.resetForce();
     }
+    List<Particle> newParticles = [];
+    List<Particle> forDelete = [];
+    for (var i = 0; i < _particles.length - 1; i++) {
+      var a = _particles[i];
+      if (forDelete.contains(a)) {
+        continue;
+      }
+      for (var j = i + 1; j < _particles.length; j++) {
+        var b = _particles[j];
+        if (forDelete.contains(b)) {
+          continue;
+        }
+        Vector posA = a.getPosition().clone();
+        Vector posB = b.getPosition().clone();
+        Vector diff = posA.clone().sub(posB);
+        if (diff.getLength() < (a.getRadius() + b.getRadius() / 2)) {
+          var mass = a.getMass() + b.getMass();
+          Particle newParticle = Particle(mass: mass);
+          newParticle.addPositionNum(
+              posB.x +
+                  (diff.x * a.getMass()) / newParticle.getMass(),
+              posB.y +
+                  (diff.y * a.getMass()) / newParticle.getMass());
+          newParticle.addVelocityNum(
+              (a.getMass() / newParticle.getMass()) * a.getVelocity().x + (b.getMass() / newParticle.getMass()) * b.getVelocity().x,
+              (a.getMass() / newParticle.getMass()) * a.getVelocity().y + (b.getMass() / newParticle.getMass()) * b.getVelocity().y);
+          newParticles.add(newParticle);
+          forDelete.addAll([a, b]);
+        }
+      }
+    }
+    List<Particle> updateParticles = [];
+    for (var particle in _particles) {
+      if (!forDelete.contains(particle)) {
+        updateParticles.add(particle);
+      }
+    }
+    updateParticles.addAll(newParticles);
+    _particles.clear();
+    _particles.addAll(updateParticles);
     _isSimulating = false;
     notifyListeners();
   }

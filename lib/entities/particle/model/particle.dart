@@ -19,7 +19,7 @@ class Particle {
         _force = Vector();
 
   double getRadius() {
-    return sqrt(_mass / pi);
+    return sqrt(_mass / pi) / 2;
   }
 
   Vector getPosition() {
