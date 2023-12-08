@@ -1,11 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:gravity_simulator/entities/particle/lib/phisics.dart';
 import './particle.dart';
 import './vector.dart';
 
 class ParticleModel with ChangeNotifier {
-  final Physics _physics = Physics(G: 0.00001);
   int _particlesCount = 0;
+  double G = 0.001;
   bool _isSimulating = false;
   final List<Particle> _particles = [];
 
@@ -37,7 +38,20 @@ class ParticleModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void simulate() async {
+  double getAttractiveForce(double mass1, double mass2, double range) {
+    return G * mass1 * mass2 / max(range * range, 0.00001);
+  }
+
+  Vector getAttractiveForceVector(Particle a, Particle b) {
+    final Vector forceVector = a.getPosition().clone();
+    forceVector.sub(b.getPosition());
+    double dist = a.distanceTo(b);
+    double force = getAttractiveForce(a.getMass(), b.getMass(), dist);
+    forceVector.mult(force);
+    return forceVector;
+  }
+
+  Future<void> simulate() async {
     if (_isSimulating) {
       return;
     }
@@ -46,7 +60,7 @@ class ParticleModel with ChangeNotifier {
       final Particle p0 = _particles[i];
       for (var j = i + 1; j < _particles.length; j++) {
         final Particle p1 = _particles[j];
-        Vector force = _physics.getAttractiveForceVector(p0, p1);
+        Vector force = getAttractiveForceVector(p0, p1);
         p0.addForce(force.getNegative());
         p1.addForce(force);
       }
