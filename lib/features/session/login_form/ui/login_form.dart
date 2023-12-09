@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gravity_simulator/entities/session/model/session_model.dart';
-import 'package:gravity_simulator/features/session/login_form/model/login_model.dart';
+import 'package:gravity_simulator/features/session/login_form/model/login_form_model.dart';
 import 'package:gravity_simulator/shared/routing/routes.dart';
 import 'package:gravity_simulator/shared/ui/textInput/text_input.dart';
 import 'package:provider/provider.dart';
@@ -8,14 +7,13 @@ import 'package:provider/provider.dart';
 class LoginForm extends StatelessWidget {
   const LoginForm({super.key});
 
-  onSuccessAuth(BuildContext context) {
-    Navigator.pushReplacementNamed(context, Routes.home);
-  }
-
-  onClickHandler(BuildContext context) {
+  void onSubmited(BuildContext context) {
     LoginFormModel loginFormModel = context.read<LoginFormModel>();
-    SessionModel sessionModel = context.read<SessionModel>();
-    sessionModel.authFx(loginFormModel.login, loginFormModel.password, () => onSuccessAuth(context), () {});
+    loginFormModel.auth().then((success) {
+      if (success) {
+        Navigator.pushReplacementNamed(context, Routes.home);
+      }
+    });
   }
 
   @override
@@ -40,7 +38,7 @@ class LoginForm extends StatelessWidget {
           onChanged: (value) => loginFormModel.setPassword(value)),
       const SizedBox(height: 20.0),
       TextButton(
-          onPressed: () => onClickHandler(context),
+          onPressed: () => onSubmited(context),
           style: TextButton.styleFrom(
               backgroundColor: Colors.blue, fixedSize: const Size(100, 30)),
           child: const Text(

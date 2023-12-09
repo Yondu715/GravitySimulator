@@ -10,10 +10,20 @@ class ServiceApi {
   factory ServiceApi() {
     return _instance;
   }
-  ServiceApi._singleton();
+  ServiceApi._singleton() {
+    _baseInstance.dio.interceptors
+        .add(InterceptorsWrapper(onRequest: (options, handler) async {
+      options.headers['Accept'] = 'application/json';
+      handler.next(options);
+    }));
+  }
 
-  Future<CustomResponse> _createRequest(
-      String uri, String method, Object? body) async {
+  void addInterceptor(InterceptorsWrapper interceptorsWrapper) {
+    _baseInstance.dio.interceptors.add(interceptorsWrapper);
+  }
+
+  Future<CustomResponse> _createRequest(String uri, String method,
+      [Object? body]) async {
     Response response;
     switch (method) {
       case 'get':
@@ -25,10 +35,20 @@ class ServiceApi {
         response = await _baseInstance.dio.get('/$uri');
         break;
     }
-    return CustomResponse(statusCode: response.statusCode, body: response.data);
+    if ((response.statusCode ?? 404) >= 400) {
+      return CustomResponse(statusCode: response.statusCode, body: response.data['errors']);
+    } else if (response.statusCode == 204) {
+      return CustomResponse(statusCode: response.statusCode, body: null);
+    }
+    return CustomResponse(
+        statusCode: response.statusCode, body: response.data['data']);
   }
 
   Future<CustomResponse> auth(Object params) async {
     return _createRequest('auth/login', 'post', params);
+  }
+
+  Future<CustomResponse> me() async {
+    return _createRequest('auth/me', 'get');
   }
 }

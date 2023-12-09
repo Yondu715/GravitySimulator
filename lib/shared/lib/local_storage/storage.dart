@@ -14,15 +14,10 @@ class Storage {
 
   Future<T> get<T>(String key, T defaultValue) async {
     SharedPreferences preferences = await _getStorageInstance();
-    Object? value;
-    try {
-      value = preferences.get(key);
-      if (value == null) {
-        return defaultValue;
-      }
-      return value as T;
-    } catch (e) {
+    Object? value = preferences.get(key);
+    if (value == null) {
       return defaultValue;
     }
+    return value as T;
   }
 }

@@ -10,7 +10,9 @@ class BaseInstance {
     BaseOptions baseOptions = BaseOptions(
       baseUrl: '$_protocol://$_uri:$_port/api',
       responseType: ResponseType.json,
-      contentType: Headers.jsonContentType
+      contentType: Headers.jsonContentType,
+      receiveDataWhenStatusError: true,
+      validateStatus: (status) => true,
     );
     dio = Dio(baseOptions);
   }

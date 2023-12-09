@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:gravity_simulator/entities/particle/model/particle_service.dart';
 
 class ChangeCountModel with ChangeNotifier {
-  String count = "";
+  final ParticleService _particleService = ParticleService();
 
   void setCount(String count) {
-    this.count = count;
+    int countNum = count.isNotEmpty
+        ? int.parse(count)
+        : 0;
+    _particleService.setCount(countNum);
     notifyListeners();
   }
+
 }

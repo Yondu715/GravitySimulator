@@ -1,14 +1,18 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
 import './particle.dart';
 import './vector.dart';
 
-class ParticleModel with ChangeNotifier {
+class ParticleService {
   int _particlesCount = 0;
   double G = 0.0001;
-  bool _isSimulating = false;
   final List<Particle> _particles = [];
+
+  static final ParticleService _instance = ParticleService._singleton();
+  factory ParticleService() {
+    return _instance;
+  }
+  ParticleService._singleton();
 
   List<Particle> getParticles() {
     return _particles;
@@ -18,24 +22,17 @@ class ParticleModel with ChangeNotifier {
     return _particlesCount;
   }
 
-  bool getIsSimulating() {
-    return _isSimulating;
-  }
-
   void add(Particle particle) {
     _particles.add(particle);
-    notifyListeners();
   }
 
   void setAll(List<Particle> particles) {
     _particles.clear();
     _particles.addAll(particles);
-    notifyListeners();
   }
 
   void setCount(int count) {
     _particlesCount = count;
-    notifyListeners();
   }
 
   double getAttractiveForce(double mass1, double mass2, double range) {
@@ -52,10 +49,6 @@ class ParticleModel with ChangeNotifier {
   }
 
   Future<void> simulate() async {
-    if (_isSimulating) {
-      return;
-    }
-    _isSimulating = true;
     for (var i = 0; i < _particles.length - 1; i++) {
       final Particle p0 = _particles[i];
       for (var j = i + 1; j < _particles.length; j++) {
@@ -112,7 +105,5 @@ class ParticleModel with ChangeNotifier {
     updateParticles.addAll(newParticles);
     _particles.clear();
     _particles.addAll(updateParticles);
-    _isSimulating = false;
-    notifyListeners();
   }
 }
