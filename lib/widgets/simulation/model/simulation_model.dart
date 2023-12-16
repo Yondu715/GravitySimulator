@@ -13,14 +13,22 @@ class SimulationModel with ChangeNotifier {
   get particles => _particles;
   get isSimulating => _isSimulating;
 
+  SimulationModel() {
+    _particleModel.particleStream.listen((particles) {
+      _particles.clear();
+      _particles.addAll(particles);
+    });
+  }
+
   void initParticles(double screenHeight, double screenWidth) {
+    List<Particle> temp = [];
     for (var i = 0; i < _particleModel.getParticlesCount(); i++) {
-      _particles.add(Particle(
+      temp.add(Particle(
           x: _getRandomBetween(25, screenWidth),
           y: _getRandomBetween(25, screenHeight),
           mass: _getRandomBetween(100, 500)));
     }
-    _particleModel.setAll(_particles);
+    _particleModel.setAll(temp);
   }
 
   double _getRandomBetween(double min, double max) {
@@ -29,14 +37,11 @@ class SimulationModel with ChangeNotifier {
 
   void addParticle(Particle particle) {
     _particleModel.add(particle);
-    _particles.add(particle);
     notifyListeners();
   }
 
   void addAllParticles(List<Particle> particles) {
     _particleModel.setAll(particles);
-    _particles.clear();
-    _particles.addAll(particles);
     notifyListeners();
   }
 
@@ -47,8 +52,6 @@ class SimulationModel with ChangeNotifier {
     _isSimulating = true;
     notifyListeners();
     await _particleModel.simulate();
-    _particles.clear();
-    _particles.addAll(_particleModel.getParticles());
     _isSimulating = false;
     notifyListeners();
   }

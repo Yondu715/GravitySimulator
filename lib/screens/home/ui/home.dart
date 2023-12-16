@@ -11,16 +11,8 @@ class HomeScreen extends StatelessWidget {
           title: const Text('Gravity Simulator'),
         ),
         body: const Center(
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Text(
-            'Gravity Simulator',
-            style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 20.0),
-          ChangeCount()
-        ])
-      )
-    );
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [ChangeCount()])));
   }
 }

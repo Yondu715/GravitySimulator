@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import './particle.dart';
@@ -7,12 +8,19 @@ class ParticleService {
   int _particlesCount = 0;
   double G = 0.0001;
   final List<Particle> _particles = [];
+  final _particleStream = StreamController<List<Particle>>();
 
   static final ParticleService _instance = ParticleService._singleton();
   factory ParticleService() {
     return _instance;
   }
   ParticleService._singleton();
+
+  Stream<List<Particle>> get particleStream => _particleStream.stream;
+
+  void dispose() {
+    _particleStream.close();
+  }
 
   List<Particle> getParticles() {
     return _particles;
@@ -24,11 +32,13 @@ class ParticleService {
 
   void add(Particle particle) {
     _particles.add(particle);
+    _particleStream.add(_particles.toList());
   }
 
   void setAll(List<Particle> particles) {
     _particles.clear();
     _particles.addAll(particles);
+    _particleStream.add(_particles.toList());
   }
 
   void setCount(int count) {
@@ -102,8 +112,8 @@ class ParticleService {
         updateParticles.add(particle);
       }
     }
+    _particlesCount = updateParticles.length;
     updateParticles.addAll(newParticles);
-    _particles.clear();
-    _particles.addAll(updateParticles);
+    setAll(updateParticles);
   }
 }
