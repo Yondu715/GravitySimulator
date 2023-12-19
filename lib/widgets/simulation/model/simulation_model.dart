@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
-import 'package:gravity_simulator/entities/particle/model/particle.dart';
+import 'package:gravity_simulator/entities/particle/model/types/particle.dart';
 import 'package:gravity_simulator/entities/particle/model/particle_service.dart';
 
 class SimulationModel with ChangeNotifier {
@@ -50,9 +50,7 @@ class SimulationModel with ChangeNotifier {
       return;
     }
     _isSimulating = true;
-    notifyListeners();
     await _particleModel.simulate();
     _isSimulating = false;
-    notifyListeners();
   }
 }

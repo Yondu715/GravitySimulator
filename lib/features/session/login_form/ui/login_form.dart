@@ -33,8 +33,7 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     LoginFormModel loginFormModel = context.read<LoginFormModel>();
-    return Center(
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       const Text(
         'Авторизация',
         style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
@@ -72,6 +71,6 @@ class _LoginFormState extends State<LoginForm> {
             style: TextStyle(
                 fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
           ))
-    ]));
+    ]);
   }
 }

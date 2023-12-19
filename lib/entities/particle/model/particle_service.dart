@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:math';
 
-import './particle.dart';
-import './vector.dart';
+import 'types/particle.dart';
+import 'types/vector.dart';
 
 class ParticleService {
   int _particlesCount = 0;
@@ -90,7 +90,7 @@ class ParticleService {
         Vector posA = a.getPosition().clone();
         Vector posB = b.getPosition().clone();
         Vector diff = posA.clone().sub(posB);
-        if (diff.getLength() < (a.getRadius() + b.getRadius() / 2)) {
+        if (diff.getLength() < (a.getRadius() + b.getRadius()) / 2) {
           var mass = a.getMass() + b.getMass();
           Particle newParticle = Particle(mass: mass);
           newParticle.addPositionNum(

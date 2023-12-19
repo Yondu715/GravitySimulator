@@ -10,6 +10,6 @@ class LoginScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Gravity Simulator'),
         ),
-        body: const LoginForm());
+        body: const Center(child: LoginForm()));
   }
 }

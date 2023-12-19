@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gravity_simulator/widgets/simulation/model/simulation_model.dart';
 import 'package:provider/provider.dart';
-import '../../../entities/particle/model/particle.dart';
+import '../../../entities/particle/model/types/particle.dart';
 import '../../../entities/particle/ui/particleList/List.dart';
 
 class SimulationWidget extends StatefulWidget {
