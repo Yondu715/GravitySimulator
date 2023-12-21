@@ -11,7 +11,6 @@ class SimulationModel with ChangeNotifier {
   bool _isSimulating = false;
 
   get particles => _particles;
-  get isSimulating => _isSimulating;
 
   SimulationModel() {
     _particleModel.particleStream.listen((particles) {
@@ -24,8 +23,8 @@ class SimulationModel with ChangeNotifier {
     List<Particle> temp = [];
     for (var i = 0; i < _particleModel.getParticlesCount(); i++) {
       temp.add(Particle(
-          x: _getRandomBetween(25, screenWidth),
-          y: _getRandomBetween(25, screenHeight),
+          x: _getRandomBetween(25, screenWidth - 60),
+          y: _getRandomBetween(25, screenHeight - 200),
           mass: _getRandomBetween(100, 500)));
     }
     _particleModel.setAll(temp);
@@ -45,12 +44,12 @@ class SimulationModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> simulate() async {
+  Future<void> simulateFx() async {
     if (_isSimulating) {
       return;
     }
     _isSimulating = true;
-    await _particleModel.simulate();
+    await _particleModel.simulateFx();
     _isSimulating = false;
   }
 }

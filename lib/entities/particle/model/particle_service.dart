@@ -58,7 +58,7 @@ class ParticleService {
     return forceVector;
   }
 
-  Future<void> simulate() async {
+  Future<void> simulateFx() async {
     for (var i = 0; i < _particles.length - 1; i++) {
       final Particle p0 = _particles[i];
       for (var j = i + 1; j < _particles.length; j++) {

@@ -7,9 +7,10 @@ class CustomResponse {
   };
 
   late int statusCode;
-  Map<String, dynamic>? body;
+  late Map<String, dynamic> body;
 
-  CustomResponse({int? statusCode = 404, this.body}) {
+  CustomResponse({int? statusCode,  Map<String, dynamic>? body}) {
+    this.body = body ?? <String, dynamic>{};
     this.statusCode = _statusTable[statusCode] ?? 404;
   }
 }

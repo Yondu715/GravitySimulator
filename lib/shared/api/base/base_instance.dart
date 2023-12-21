@@ -13,6 +13,9 @@ class BaseInstance {
       contentType: Headers.jsonContentType,
       receiveDataWhenStatusError: true,
       validateStatus: (status) => true,
+      headers: {
+        'Accept': 'application/json'
+      }
     );
     dio = Dio(baseOptions);
   }

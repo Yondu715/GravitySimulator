@@ -29,16 +29,14 @@ class _SimulationWidgetState extends State<SimulationWidget>
   void initState() {
     super.initState();
     SimulationModel simulationModel = context.read<SimulationModel>();
-    simulationModel.initParticles(_size.height / _pixelRatio - 200, _size.width / _pixelRatio - 60);
+    simulationModel.initParticles(_size.height / _pixelRatio, _size.width / _pixelRatio);
 
     _animationController =
         AnimationController(vsync: this, duration: const Duration(seconds: 1));
     _animation = Tween(begin: 0.0, end: 1.0).animate(_animationController);
     _animation.addListener(() {
       setState(() {
-        if (!simulationModel.isSimulating) {
-          simulationModel.simulate();
-        }
+          simulationModel.simulateFx();
       });
     });
     _animationController.repeat();
