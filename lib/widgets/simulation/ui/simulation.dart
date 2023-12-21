@@ -45,7 +45,6 @@ class _SimulationWidgetState extends State<SimulationWidget>
   @override
   Widget build(BuildContext context) {
     List<Particle> particles = context.watch<SimulationModel>().particles;
-
     return Scaffold(
         body: ParticleList(particles: particles, particleColor: Colors.cyan));
   }
